@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Coin Peek</string>
+
+    <string name="last_updated">Last updated:\n%s</string>
+    <string name="no_data_available">No data available.</string>
+
+    <string name="high_title">High</string>
+    <string name="low_title">Low</string>
+    <string name="open_title">Open</string>
+
+    <string name="btc_description">The first and most widely known cryptocurrency, Bitcoin enables peer-to-peer digital money transfers with no central authority.</string>
+    <string name="btc_url">https://bitcoin.org</string>
+    <string name="eth_description">Ethereum is a programmable blockchain platform that supports smart contracts and decentralized applications; ETH is its native token used to pay for computation and transaction fees.</string>
+    <string name="eth_url">https://ethereum.org</string>
+    <string name="dot_description">Polkadot is a multi-chain protocol designed to connect different blockchains, allowing them to interoperate; DOT is its token used for governance, staking and bonding.</string>
+    <string name="dot_url">https://polkadot.network</string>
+    <string name="xrp_description">XRP is the native digital asset of the XRP Ledger, used for fast, low-cost cross-border payments and liquidity provisioning without relying on traditional correspondent banking.</string>
+    <string name="xrp_url">https://xrpl.org</string>
+    <string name="usdt_description">Tether (USDT) is a stablecoin pegged to the US dollar, designed to maintain a 1:1 value and serve as a bridge between crypto and fiat for stability.</string>
+    <string name="usdt_url">https://tether.to</string>
+    <string name="bnb_description">Binance Coin (BNB) is the native token of the Binance ecosystem, used for trading fee discounts, governance, staking, and powering Binance’s blockchain infrastructure.</string>
+    <string name="bnb_url">https://www.bnbchain.org</string>
+    <string name="doge_description">Originally created as a “meme coin,” Dogecoin has gained popularity and utility with a strong community, being used for tipping and micropayments.</string>
+    <string name="doge_url">https://dogecoin.com</string>
 </resources>

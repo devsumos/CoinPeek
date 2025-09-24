@@ -9,35 +9,31 @@ import java.time.format.DateTimeFormatter
 data class CoinPriceResponse(
     @SerializedName("Data")
     val data: Map<String, CoinData>,
-
     @SerializedName("Err")
-    val err: Any? // or use Map<String, Any> if you want to handle it
+    val err: Any?
 )
 
 data class CoinData(
     @SerializedName("INSTRUMENT")
     val instrument: String?,
-
     @SerializedName("MARKET")
     val market: String?,
-
     @SerializedName("VALUE")
     val value: Double?,
-
     @SerializedName("VALUE_FLAG")
     val valueFlag: String?,
-
     @SerializedName("VALUE_LAST_UPDATE_TS")
     val lastUpdatedTimestamp: Long?,
-
     @SerializedName("CURRENT_DAY_HIGH")
     val dayHigh: Double?,
-
     @SerializedName("CURRENT_DAY_LOW")
     val dayLow: Double?,
-
     @SerializedName("CURRENT_DAY_OPEN")
-    val dayOpen: Double?
+    val dayOpen: Double?,
+    @SerializedName("MOVING_24_HOUR_CHANGE")
+    val dailyChange: Double?,
+    @SerializedName("MOVING_24_HOUR_CHANGE_PERCENTAGE")
+    val dailyChangePercentage: Double?
 )
 
 fun CoinData.toCoinDetails(): CoinDetails =
@@ -49,8 +45,15 @@ fun CoinData.toCoinDetails(): CoinDetails =
         dayHigh = dayHigh,
         dayLow = dayLow,
         dayOpen = dayOpen,
+        dailyChange = dailyChange,
+        dailyChangePercentage = dailyChangePercentage,
     )
 
+fun CoinPriceResponse.toCoinDetailsList(): List<CoinDetails> {
+    val list = mutableListOf<CoinDetails>()
+    this.data.forEach { _, coin -> list.add(coin.toCoinDetails()) }
+    return list
+}
 
 private fun getFormatedDate(timeStamp: Long?): String {
     if (timeStamp == null) return ""
@@ -62,5 +65,5 @@ fun Long.toFormattedDate(): String {
         .atZone(ZoneId.systemDefault())
         .toLocalDateTime()
 
-    return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+    return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
 }

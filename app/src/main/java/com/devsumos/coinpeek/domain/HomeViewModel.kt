@@ -2,7 +2,8 @@ package com.devsumos.coinpeek.domain
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.devsumos.coinpeek.data.remote.toCoinDetails
+import com.devsumos.coinpeek.data.remote.toCoinDetailsList
+import com.devsumos.coinpeek.data.repo.CURRENCY
 import com.devsumos.coinpeek.data.repo.CoinRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,12 +12,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val BTC_USD_DATA_NAME = "BTC-USD"
-private const val ETH_USD_DATA_NAME = "ETH-USD"
-private const val DOT_USD_DATA_NAME = "DOT-USD"
-
 @HiltViewModel
-class CoinViewModel @Inject constructor(
+class HomeViewModel @Inject constructor(
     private val repository: CoinRepository
 ) : ViewModel() {
 
@@ -26,25 +23,25 @@ class CoinViewModel @Inject constructor(
     val state = _state.asStateFlow()
 
     init {
-        fetchData()
+        fetchData(CURRENCY.USD)
     }
 
-    fun fetchData() {
+    fun fetchData(currency: CURRENCY) {
         viewModelScope.launch {
             _state.update {
-                it.copy(isLoading = true)
+                it.copy(
+                    isLoading = true,
+                )
             }
             try {
-                val response = repository.getCoinPrice()
-                val bitcoinDetails = response.data[BTC_USD_DATA_NAME]?.toCoinDetails()
-                val etheriumDetails = response.data[ETH_USD_DATA_NAME]?.toCoinDetails()
-                val polkaDetails = response.data[DOT_USD_DATA_NAME]?.toCoinDetails()
+                val allCoinPrices = repository.getAllCoinPrices(currency = currency)
+                val list = allCoinPrices.toCoinDetailsList()
                 _state.update {
                     it.copy(
-                        bitcoinDetails = bitcoinDetails,
-                        etheriumDetails = etheriumDetails,
-                        polkaDetails = polkaDetails,
+                        allCoinDetails = list,
                         showError = false,
+                        selectedCurrency = currency,
+                        lastUpdatedTimestamp = list.first().lastUpdatedTimestamp,
                     )
                 }
 
@@ -63,12 +60,18 @@ class CoinViewModel @Inject constructor(
         }
     }
 
+    fun onCoinClick(title: String) {
+    }
+
+    fun onCurrencyClick(currency: CURRENCY) {
+        fetchData(currency)
+    }
+
     data class State(
-        val bitcoinDetails: CoinDetails? = null,
-        val etheriumDetails: CoinDetails? = null,
-        val polkaDetails: CoinDetails? = null,
+        val allCoinDetails: List<CoinDetails>? = null,
+        val lastUpdatedTimestamp: String = "",
+        val selectedCurrency: CURRENCY? = null,
         val isLoading: Boolean = false,
         val showError: Boolean = false,
-
-        )
+    )
 }

@@ -7,5 +7,7 @@ data class CoinDetails(
     val lastUpdatedTimestamp: String = "",
     val dayHigh: Double?,
     val dayLow: Double?,
-    val dayOpen: Double?
+    val dayOpen: Double?,
+    val dailyChange: Double?,
+    val dailyChangePercentage: Double?,
 )
