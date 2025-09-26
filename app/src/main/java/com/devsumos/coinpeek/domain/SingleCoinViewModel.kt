@@ -18,13 +18,11 @@ import kotlinx.coroutines.launch
 @HiltViewModel(assistedFactory = SingleCoinViewModel.Factory::class)
 class SingleCoinViewModel @AssistedInject constructor(
     @Assisted private val coinName: String = "",
-    private val repository: CoinRepository,
+    private val coinRepository: CoinRepository,
     private val getCoinDescriptionUrlUseCase: GetCoinDescriptionUrlUseCase,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(
-        State()
-    )
+    private val _state = MutableStateFlow(State())
     val state = _state.asStateFlow()
 
     private val _navigationState = MutableStateFlow<String>("")
@@ -53,7 +51,7 @@ class SingleCoinViewModel @AssistedInject constructor(
                 )
             }
             try {
-                val allCoinPrices = repository.getSingleCoinPrice(coinName, currency)
+                val allCoinPrices = coinRepository.getSingleCoinPrice(coinName, currency)
                 val coinDetails = allCoinPrices.data.values.first().toCoinDetails()
                 _state.update {
                     it.copy(

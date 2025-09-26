@@ -6,21 +6,18 @@ junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.9.3"
-lifecycleRuntimeCompose = "2.9.3"
 activityCompose = "1.10.1"
 composeBom = "2025.03.01"
-fragmentKtx = "1.8.6"
-fragmentCompose = "1.8.6"
 dagger = "2.55"
 hilt = "1.2.0"
-constraintlayout = "2.2.1"
 navigationKtx = "2.8.9"
 kspPlugin = "2.1.10-1.0.30"
-androidxAppcompat = "1.7.0"
-roomVersion = "2.7.0"
-calendarVersion = "2.6.0"
 gsonVersion = "2.8.8"
 retrofit = "2.9.0"
+mockito = "5.4.0"
+mockitoKotlin = "5.2.1"
+coroutinesTest = "1.7.3"
+jupiter = "5.10.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -45,6 +42,9 @@ dagger-hilt-navigation-fragment = { group = "androidx.hilt", name = "hilt-naviga
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gsonVersion" }
+mockito = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
+mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
+kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

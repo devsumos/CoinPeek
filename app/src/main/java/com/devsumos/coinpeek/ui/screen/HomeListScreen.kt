@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -101,6 +102,7 @@ fun RefreshItem(
             tint = Color.White,
             modifier = Modifier
                 .padding(bottom = 4.dp)
+                .testTag("refresh_icon")
                 .clickable {
                     onRefresh(selectedCurrency)
                 },
@@ -195,6 +197,7 @@ fun CoinRow(
                     imageVector = Icons.Default.KeyboardArrowUp,
                     contentDescription = "Up",
                     tint = Color.Green,
+                    modifier = Modifier.testTag("up_arrow"),
                 )
                 Text(
                     text = "%${coin.dailyChangePercentage.formatAsPrice()}",
@@ -207,6 +210,7 @@ fun CoinRow(
                     imageVector = Icons.Default.KeyboardArrowDown,
                     contentDescription = "Down",
                     tint = Color.Red,
+                    modifier = Modifier.testTag("down_arrow"),
                 )
                 Text(
                     text = "%${coin.dailyChangePercentage.formatAsPrice()}",

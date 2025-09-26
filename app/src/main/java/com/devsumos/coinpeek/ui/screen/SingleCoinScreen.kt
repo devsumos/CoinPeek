@@ -27,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -213,6 +214,7 @@ fun CoinDataCard(
                         imageVector = Icons.Default.KeyboardArrowUp,
                         contentDescription = "Up",
                         tint = Color.Green,
+                        modifier = Modifier.testTag("up_arrow"),
                     )
                     Text(
                         text = "%${coinDetails.dailyChangePercentage.formatAsPrice()}",
@@ -225,6 +227,7 @@ fun CoinDataCard(
                         imageVector = Icons.Default.KeyboardArrowDown,
                         contentDescription = "Down",
                         tint = Color.Red,
+                        modifier = Modifier.testTag("down_arrow"),
                     )
                     Text(
                         text = "%${coinDetails.dailyChangePercentage.formatAsPrice()}",

@@ -60,9 +60,6 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun onCoinClick(title: String) {
-    }
-
     fun onCurrencyClick(currency: CURRENCY) {
         fetchData(currency)
     }
